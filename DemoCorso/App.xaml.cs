@@ -1,4 +1,5 @@
-﻿using DemoCorso.Library;
+﻿using DemoCorso.Customers;
+using DemoCorso.Library;
 using DemoCorso.StartupHelpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +22,7 @@ public partial class App : Application
 				   services.AddSingleton<MainWindow>();
 				   services.AddTransient<IDataAccess, DataAccess>();
 				   services.AddWindowFactory<ChildForm>();
+				   services.AddSingleton<Customers.ICustomersRepository, MockCustomersRepository>();
 
                }
 			)

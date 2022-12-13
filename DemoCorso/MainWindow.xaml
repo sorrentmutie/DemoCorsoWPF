@@ -3,8 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:customers="clr-namespace:DemoCorso.Customers"
+        xmlns:viewmodels="clr-namespace:DemoCorso.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-    </StackPanel>
+        Title="MainWindow" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type customers:CustomersListViewModel}">
+            <customers:CustomersListView></customers:CustomersListView>
+        </DataTemplate>
+    </Window.Resources>
+    <Window.DataContext>
+        <viewmodels:MainWindowViewModel></viewmodels:MainWindowViewModel>
+    </Window.DataContext>
+    <Grid x:Name="pannello">
+        <ContentControl Content="{Binding CurrentViewModel}"></ContentControl>
+    </Grid>
 </Window>

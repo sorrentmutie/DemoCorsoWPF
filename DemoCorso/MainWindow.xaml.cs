@@ -59,10 +59,10 @@ public partial class MainWindow : Window  // , INotifyPropertyChanged
         //MyCombo.SelectedIndex = 0;
     }
 
-    private void ConfButton_Click(object sender, RoutedEventArgs e)
-    {
-        ConfButton.Content = $"{configuration["Customer:Name"]} - {configuration["Customer:Surname"]}";
-    }
+    //private void ConfButton_Click(object sender, RoutedEventArgs e)
+    //{
+    //    ConfButton.Content = $"{configuration["Customer:Name"]} - {configuration["Customer:Surname"]}";
+    //}
 
     //private void ChangeButton_Click(object sender, RoutedEventArgs e)
     //{

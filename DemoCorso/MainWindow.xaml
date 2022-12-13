@@ -1,121 +1,13 @@
-﻿<Window x:Class="DemoCorso.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:converters="clr-namespace:DemoCorso.Converters"
-        xmlns:models="clr-namespace:DemoCorso.Models"
+        xmlns:Customers="clr-namespace:DemoCorso.Customers" x:Class="DemoCorso.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="800">
-    <!--<Grid x:Name="MyGrid">
 
-        <Grid.Resources>
-            <converters:NegateBooleanConverter x:Key="MyBooleanNegateConverter"/>
-        </Grid.Resources>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-
-        <Button Grid.Row="0" Grid.Column="0" x:Name="ChangeButton" Click="ChangeButton_Click">OK</Button>
-        <ComboBox Grid.Row="0" Grid.Column="1" x:Name="MyCombo"
-                  Width="200" Height="30"
-                  ItemsSource="{Binding Customers}"
-                  DisplayMemberPath="FullName"
-                  SelectedValuePath="Id"
-                  SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
-        
-        
-        <TextBlock Grid.Row="1" Grid.Column="0">Name</TextBlock>
-        <TextBox Height="30" Width="100"  Grid.Row="1" Grid.Column="1" Text="{Binding Customer.Name}"></TextBox>
-
-        <TextBlock Grid.Row="2" Grid.Column="0">Surname</TextBlock>
-        <TextBox Height="30" Width="100" Grid.Row="2" Grid.Column="1" Text="{Binding Customer.Surname}"></TextBox>
-
-        <TextBlock Grid.Row="3" Grid.Column="0">Phone Number</TextBlock>
-        <TextBox Height="30" Width="100"  Grid.Row="3" Grid.Column="1" Text="{Binding Customer.PhoneNumber}"></TextBox>
-
-        <ListBox Grid.Row="4" Grid.ColumnSpan="2" ItemsSource="{Binding Customers}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="0 0 0 5">
-                        <TextBlock Foreground="Orange" Text="{Binding Id}"></TextBlock>
-                        <TextBlock Foreground="Green" Text="{Binding FullName}"></TextBlock>
-                        <TextBlock Foreground="Red" Text="{Binding PhoneNumber}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        <Button x:Name="SaveButton" Grid.Row="5" Grid.Column="0" Click="SaveButton_Click">Save</Button>
-        <Button x:Name="CancelButton" Grid.Row="5" Grid.Column="1" Click="CancelButton_Click">Cancel</Button>
-
-        <Rectangle Grid.Row="6" Grid.ColumnSpan="2"
-                   Fill="Red" Stroke="Black"
-                   Height="50" Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}"
-                   />
-
-
-        --><!--<CheckBox IsChecked="{Binding Checked}" Grid.Row="0" Grid.Column="0"> Check1</CheckBox>
-        <CheckBox IsChecked="{Binding Checked, Converter={StaticResource MyBooleanNegateConverter}}" Grid.Row="0" Grid.Column="1"> Check2</CheckBox>-->
-
-
-        <!--<StackPanel.Resources>
-            <models:MyData x:Key="MyDataSource"></models:MyData>
-        </StackPanel.Resources>-->
-        <!--<Button x:Name="MyButton" Height="30" Width="80" Margin="10" Background="{Binding 
-            ColorName}">OK</Button>
-        <Button Height="30" Width="80" Margin="10" Background="{Binding 
-            ColorName}">Test</Button>
-        <TextBox Height="30" Width="200" x:Name="txtValue"></TextBox>
-        <TextBlock Text="{Binding ElementName=txtValue, Path=Text}"></TextBlock>-->
-
-        <!--<Slider Minimum="0" Maximum="360" x:Name="MySlider"></Slider>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200"></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Ciaoo" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock.LayoutTransform>
-                    <RotateTransform Angle="{Binding ElementName=MySlider, Path=Value}" ></RotateTransform>
-                </TextBlock.LayoutTransform>
-            </TextBlock>
-
-        </Grid>--><!--
-        
-        
-    </Grid>-->
-
-    <Grid Background="Blue">
-        <Grid Background="Orange">
-            <Border Background="Red" Margin="40">
-                <StackPanel Background="Yellow" Margin="40">
-                    <Button Content="Bottone1" Margin="10" Height="30" Width="100"
-                            Background="{Binding Background, 
-                            RelativeSource={RelativeSource Mode=FindAncestor,
-                            AncestorType={x:Type Grid}, AncestorLevel=2}}"></Button>
-
-                    <Button Content="Ciao" Background="Green"></Button>
-                    
-                    <Button x:Name="ConfButton" Click="ConfButton_Click" Content="Bottone2" Margin="10" Height="30" Width="100"
-                            Background="{Binding Background,
-                            RelativeSource={RelativeSource Mode=FindAncestor,
-                            AncestorType={x:Type FrameworkElement}}}"
-                            ></Button>
-                </StackPanel>
-            </Border>
-        </Grid>
-    </Grid>
     
-    
+    <Customers:CustomerListView HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+
 </Window>

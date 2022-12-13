@@ -33,15 +33,6 @@ public class CustomersListViewModel
     public CustomersListViewModel()
 	{
         DeleteCommand = new RelayCommand(OnDelete, CanExecuteDelete);
-
-        if (DesignerProperties.GetIsInDesignMode(
-            new System.Windows.DependencyObject())) return;
-
-        var customers = (repository.GetCustomers()).Result;
-        foreach (var customer in customers)
-        {
-            Customers.Add(customer);
-        }
     }
 
     private bool CanExecuteDelete()
@@ -56,4 +47,17 @@ public class CustomersListViewModel
             Customers.Remove(SelectedCustomer);
         }
     }
+
+    public async void LoadCustomers()
+    {
+        if (DesignerProperties.GetIsInDesignMode(
+            new System.Windows.DependencyObject())) return;
+
+        var customers = await (repository.GetCustomers());
+        foreach (var customer in customers)
+        {
+            Customers.Add(customer);
+        }
+    }
+
 }

@@ -41,6 +41,7 @@ public partial class App : Application
 
 	//	var x = Configuration["Prova"];
 
+
 		var startUpForm = AppHost.Services.GetRequiredService<MainWindow>();
 		startUpForm.Show();
         base.OnStartup(e);

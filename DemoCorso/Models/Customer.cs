@@ -6,9 +6,10 @@ using System.Web;
 
 namespace DemoCorso.Models;
 
-public class Customer: INotifyPropertyChanged
+public class Customer: INotifyPropertyChanged, IEditableObject
 {
-    public Guid Id { get; private set; }
+    public Guid Id { get;  set; }
+    private Customer? TempCustomer = null;
 
 	//public string? Name { get; set; }
 	private string name = string.Empty;
@@ -78,4 +79,28 @@ public class Customer: INotifyPropertyChanged
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 	}
 
+    public void BeginEdit()
+    {
+        TempCustomer = new Customer()
+        {
+            Id = Id,
+            Name = Name,
+            Surname = Surname
+        };
+    }
+
+    public void CancelEdit()
+    {
+        if(TempCustomer!= null)
+        {
+            Id = TempCustomer.Id;
+            Name = TempCustomer.Name;
+            Surname= TempCustomer.Surname;
+        }
+    }
+
+    public void EndEdit()
+    {
+        TempCustomer = null;
+    }
 }

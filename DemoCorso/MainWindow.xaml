@@ -6,8 +6,8 @@
         xmlns:converters="clr-namespace:DemoCorso.Converters"
         xmlns:models="clr-namespace:DemoCorso.Models"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="MyGrid">
+        Title="MainWindow" Height="800" Width="800">
+    <!--<Grid x:Name="MyGrid">
 
         <Grid.Resources>
             <converters:NegateBooleanConverter x:Key="MyBooleanNegateConverter"/>
@@ -17,6 +17,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -38,10 +40,10 @@
         <TextBox Height="30" Width="100"  Grid.Row="1" Grid.Column="1" Text="{Binding Customer.Name}"></TextBox>
 
         <TextBlock Grid.Row="2" Grid.Column="0">Surname</TextBlock>
-        <TextBox Height="30" Width="100" Grid.Row="1" Grid.Column="1" Text="{Binding Customer.Surname}"></TextBox>
+        <TextBox Height="30" Width="100" Grid.Row="2" Grid.Column="1" Text="{Binding Customer.Surname}"></TextBox>
 
         <TextBlock Grid.Row="3" Grid.Column="0">Phone Number</TextBlock>
-        <TextBox Height="30" Width="100"  Grid.Row="2" Grid.Column="1" Text="{Binding Customer.PhoneNumber}"></TextBox>
+        <TextBox Height="30" Width="100"  Grid.Row="3" Grid.Column="1" Text="{Binding Customer.PhoneNumber}"></TextBox>
 
         <ListBox Grid.Row="4" Grid.ColumnSpan="2" ItemsSource="{Binding Customers}">
             <ListBox.ItemTemplate>
@@ -55,10 +57,16 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
+        <Button x:Name="SaveButton" Grid.Row="5" Grid.Column="0" Click="SaveButton_Click">Save</Button>
+        <Button x:Name="CancelButton" Grid.Row="5" Grid.Column="1" Click="CancelButton_Click">Cancel</Button>
+
+        <Rectangle Grid.Row="6" Grid.ColumnSpan="2"
+                   Fill="Red" Stroke="Black"
+                   Height="50" Width="{Binding RelativeSource={RelativeSource Self}, Path=Height}"
+                   />
 
 
-
-        <!--<CheckBox IsChecked="{Binding Checked}" Grid.Row="0" Grid.Column="0"> Check1</CheckBox>
+        --><!--<CheckBox IsChecked="{Binding Checked}" Grid.Row="0" Grid.Column="0"> Check1</CheckBox>
         <CheckBox IsChecked="{Binding Checked, Converter={StaticResource MyBooleanNegateConverter}}" Grid.Row="0" Grid.Column="1"> Check2</CheckBox>-->
 
 
@@ -83,8 +91,31 @@
                 </TextBlock.LayoutTransform>
             </TextBlock>
 
-        </Grid>-->
+        </Grid>--><!--
         
         
+    </Grid>-->
+
+    <Grid Background="Blue">
+        <Grid Background="Orange">
+            <Border Background="Red" Margin="40">
+                <StackPanel Background="Yellow" Margin="40">
+                    <Button Content="Bottone1" Margin="10" Height="30" Width="100"
+                            Background="{Binding Background, 
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                            AncestorType={x:Type Grid}, AncestorLevel=2}}"></Button>
+
+                    <Button Content="Ciao" Background="Green"></Button>
+                    
+                    <Button x:Name="ConfButton" Click="ConfButton_Click" Content="Bottone2" Margin="10" Height="30" Width="100"
+                            Background="{Binding Background,
+                            RelativeSource={RelativeSource Mode=FindAncestor,
+                            AncestorType={x:Type FrameworkElement}}}"
+                            ></Button>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
+    
+    
 </Window>

@@ -1,4 +1,5 @@
-﻿using DemoCorso.Library;
+﻿using DemoCorso.Customers;
+using DemoCorso.Library;
 using DemoCorso.Models;
 using DemoCorso.StartupHelpers;
 using Microsoft.Extensions.Configuration;
@@ -35,13 +36,15 @@ public partial class MainWindow : Window  // , INotifyPropertyChanged
     //public ObservableCollection<Customer>? Customers { get; set; } 
 
     public MainWindow(ILogger<MainWindow> logger,  IDataAccess dataAccess, 
-        IAbstractFactory<ChildForm> abstractFactory, IConfiguration configuration)
+        IAbstractFactory<ChildForm> abstractFactory, IConfiguration configuration,
+        ICustomersRepository customersRepository, IOrderRepository ordersRepository)
     {
         InitializeComponent();
         this.configuration = configuration;
 
         var x = configuration["Customer:Name"];
 
+        DataContext = new MainWindowViewModel(customersRepository, ordersRepository); 
         //Customer = new Customer
         //{
         //    Name = "Mario",

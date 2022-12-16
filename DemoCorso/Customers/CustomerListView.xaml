@@ -4,10 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:customers="clr-namespace:DemoCorso.Customers"
-             xmlns:local="clr-namespace:DemoCorso.Customers"
              xmlns:models="clr-namespace:DemoCorso.Models"
+             xmlns:behaviors="clr-namespace:DemoCorso.StartupHelpers"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             behaviors:MvvmBehaviors.LoadedMethodName="LoadCustomers">
+
+
+    <UserControl.Resources>
+        <!--<Style TargetType="Button">
+            <Setter Property="Foreground" Value="Blue"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Green"></Setter>
+                </Trigger>
+                <EventTrigger RoutedEvent="Click">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Duration="0:0:5">
+                                    <LinearDoubleKeyFrame Value="80" KeyTime="0:0:0"/>
+                                    <LinearDoubleKeyFrame Value="90" KeyTime="0:0:1"/>
+                                    <LinearDoubleKeyFrame Value="100" KeyTime="0:0:2"/>
+                                    <LinearDoubleKeyFrame Value="120" KeyTime="0:0:3"/>
+                                    <LinearDoubleKeyFrame Value="70" KeyTime="0:0:4"/>
+                                </DoubleAnimationUsingKeyFrames>
+
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" Duration="0:0:4">
+                                    <LinearDoubleKeyFrame Value="30" KeyTime="0:0:0"/>
+                                    <LinearDoubleKeyFrame Value="40" KeyTime="0:0:1"/>
+                                    <LinearDoubleKeyFrame Value="50" KeyTime="0:0:2"/>
+                                    <LinearDoubleKeyFrame Value="60" KeyTime="0:0:3"/>
+                                    <LinearDoubleKeyFrame Value="30" KeyTime="0:0:4"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                       
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>-->
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type models:Customer}">
@@ -21,10 +59,21 @@
             </DataTemplate>
         </Grid.Resources>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DataGrid CanUserAddRows="False" ItemsSource="{Binding Customers}" AutoGenerateColumns="False"
+
+        <Button Content="Delete" Width="70" Height="30" Command="{Binding DeleteCommand}">
+            
+            
+            
+        </Button>
+        
+        <DataGrid Grid.Row="1" CanUserAddRows="False"
+                  SelectedItem="{Binding SelectedCustomer}"
+                  ItemsSource="{Binding Customers}" AutoGenerateColumns="False"
                   EnableRowVirtualization="True"
                   RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
@@ -34,11 +83,55 @@
                 <DataGridTextColumn x:Name="Id"
                                     Header="Id" Width="500"
                                     Binding="{Binding Id}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Add Order" 
+                                Command="{
+                                Binding DataContext.AddOrderCommand, 
+                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                CommandParameter="{Binding}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit Customer"
+                                    Command="{
+                                Binding DataContext.EditCustomer, 
+                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                CommandParameter="{Binding}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
 
         </DataGrid>
 
-        <ListBox  ItemsSource="{Binding Customers}" Grid.Row="1"></ListBox>
+        <ListBox  ItemsSource="{Binding Customers}" Grid.Row="2"></ListBox>
+
+
+        <StackPanel Grid.Row="3">
+
+            <CheckBox x:Name="redColorCheckBox" Content="Set red foreground color">
+                
+            </CheckBox>
+
+            <TextBlock Text="Some text">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{
+                                Binding ElementName=redColorCheckBox,
+                                Path=IsChecked}" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
         
     </Grid>
 </UserControl>

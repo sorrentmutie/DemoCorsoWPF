@@ -4,10 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Customers="clr-namespace:DemoCorso.Customers" x:Class="DemoCorso.MainWindow"
+        xmlns:local="clr-namespace:DemoCorso"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="800">
 
+
+    <!--<Window.DataContext>
+        <local:MainWindowViewModel></local:MainWindowViewModel>
+    </Window.DataContext>-->
     
-    <Customers:CustomerListView HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type Customers:CustomerListViewModel}">
+            <Customers:CustomerListView></Customers:CustomerListView>
+        </DataTemplate>
+    </Window.Resources>
+    
+
+    <Grid>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </Grid>
+
 
 </Window>
